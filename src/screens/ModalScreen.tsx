@@ -10,11 +10,21 @@ import { Modalize } from 'react-native-modalize';
 import { Portal } from 'react-native-portalize';
 
 const ModalScreen: React.FC = observer(() => {
-  const modalizeRef = React.useRef<Modalize>(null);
+  const modalizeRef1 = React.useRef<Modalize>(null);
+  const inputRef = React.useRef<Input>(null);
 
   const onOpen = () => {
-    modalizeRef.current?.open();
+    modalizeRef1.current?.open();
     immersiveModeOff();
+  };
+
+  const onOpenFocus = () => {
+    modalizeRef1.current?.open();
+    immersiveModeOff();
+    setTimeout(() => {
+      console.log(inputRef.current);
+      inputRef.current?._root.focus();
+    }, 1);
   };
 
   return (
@@ -23,15 +33,18 @@ const ModalScreen: React.FC = observer(() => {
       <TouchableOpacity onPress={onOpen}>
         <Text>Open the modal</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={onOpenFocus}>
+        <Text>Open the modal (focus)</Text>
+      </TouchableOpacity>
       <Portal>
         <Modalize
-          ref={modalizeRef}
+          ref={modalizeRef1}
           adjustToContentHeight
           onClose={() => immersiveModeOn()}>
           <Content padder>
             <Form>
               <Item>
-                <Input placeholder="Username" />
+                <Input ref={inputRef} placeholder="Username" />
               </Item>
               <Item last>
                 <Input placeholder="Password" />
