@@ -18,8 +18,8 @@ export default function createStatusBarStore() {
   const store = makeAutoObservable<StatusBarStore>({
     hidden: false,
     animated: false,
-    bg: undefined,
-    style: 'default',
+    bg: 'black',
+    style: 'light-content',
     translucent: false,
     setHidden(value: boolean) {
       store.hidden = value;

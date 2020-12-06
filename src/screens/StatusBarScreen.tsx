@@ -4,25 +4,22 @@ import {
   CheckBox,
   Container,
   Content,
-  Header,
   Left,
   ListItem,
-  Picker,
   Radio,
   Right,
   Text,
 } from 'native-base';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { useStatusBarStore } from '../context/AppContext';
 
 const StatusBarScreen: React.FC = observer(() => {
   const statusBarStore = useStatusBarStore();
   return (
     <Container>
-      <Header>
-        <Text>StatusBar</Text>
-      </Header>
-      <Content>
+      <Content padder>
+        <Text>StatusBar.currentHeight: {StatusBar.currentHeight}</Text>
         <ListItem>
           <CheckBox
             checked={statusBarStore?.hidden}
@@ -30,6 +27,17 @@ const StatusBarScreen: React.FC = observer(() => {
           />
           <Body>
             <Text>Hidden</Text>
+          </Body>
+        </ListItem>
+        <ListItem>
+          <CheckBox
+            checked={statusBarStore?.translucent}
+            onPress={() =>
+              statusBarStore?.setTranslucent(!statusBarStore?.translucent)
+            }
+          />
+          <Body>
+            <Text>Translucent</Text>
           </Body>
         </ListItem>
         <ListItem>
@@ -73,6 +81,39 @@ const StatusBarScreen: React.FC = observer(() => {
             <Radio
               selected={statusBarStore?.style === 'light-content'}
               onPress={() => statusBarStore?.setStyle('light-content')}
+            />
+          </Right>
+        </ListItem>
+        <ListItem>
+          <Left>
+            <Text>BG black</Text>
+          </Left>
+          <Right>
+            <Radio
+              selected={statusBarStore?.bg === 'black'}
+              onPress={() => statusBarStore?.setBg('black')}
+            />
+          </Right>
+        </ListItem>
+        <ListItem>
+          <Left>
+            <Text>BG green</Text>
+          </Left>
+          <Right>
+            <Radio
+              selected={statusBarStore?.bg === 'green'}
+              onPress={() => statusBarStore?.setBg('green')}
+            />
+          </Right>
+        </ListItem>
+        <ListItem>
+          <Left>
+            <Text>BG blue</Text>
+          </Left>
+          <Right>
+            <Radio
+              selected={statusBarStore?.bg === 'blue'}
+              onPress={() => statusBarStore?.setBg('blue')}
             />
           </Right>
         </ListItem>
