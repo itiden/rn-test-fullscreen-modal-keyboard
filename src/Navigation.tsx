@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import DpiScreen from './screens/DpiScreen';
 import FullScreen from './screens/FullscreenScreen';
 import HomeScreen from './screens/HomeScreen';
 import ModalScreen from './screens/ModalScreen';
@@ -26,6 +27,7 @@ const Navigation = observer(() => {
         <Tab.Screen name="Full" component={FullScreen} />
         <Tab.Screen name="StatusBar" component={StatusBarScreen} />
         <Tab.Screen name="Modals" component={ModalScreen} />
+        <Tab.Screen name="DPI" component={DpiScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
